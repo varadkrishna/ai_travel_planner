@@ -4,6 +4,7 @@ import viteLogo from '/vite.svg'
 import './App.css'
 import Header from './components/custom/Header'
 import CreateTrip from './create-trip/CreateTrip'
+import Hero from './components/custom/Hero'
 
 function App() {
   const [count, setCount] = useState(0)
@@ -11,6 +12,7 @@ function App() {
   return (
     <>
     <Header/>
+    <Hero/>
     <CreateTrip/>
     </>
   )
