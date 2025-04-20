@@ -1,12 +1,15 @@
-import { SelectBudgetOptions, SelectTravelesList } from "../constants/options";
-import { Toaster } from 'sonner'
+import { AI_PROMPT, SelectBudgetOptions, SelectTravelesList } from "../constants/options";
+import { toast, Toaster } from 'sonner'
 import React, { useEffect, useState } from "react";
 import GooglePlacesAutocomplete from "react-google-places-autocomplete";
+import { chatSession } from "@/service/AIMODAL";
+
 
 function CreateTrip() {
   const [place, setPlace] = useState();
 
   const [formData, setFormData] = useState([]);
+  const [openDailog,setOpenDailog]=useState(false);
 
   const handleInputChange=(name,value)=>{
     setFormData([...formData, {name,value}])
@@ -17,13 +20,33 @@ function CreateTrip() {
     console.log(formData);
   }, [formData])
 
-   const OnGenerateTrip = () => {
+   const OnGenerateTrip = async() => {
+     
+    const user=localStorage.getItem('user');
+
+    if (!user)
+    {
+      setOpenDailog(true)
+      return ;
+    }
+
     if (formData?.noOfDays>5&&!formData?.location||!formData?.budget||!formData.traveler)
     {
       toast("Please fill all details carefully.")
       return;
     }
-    console.log (formData);
+    const FINAL_PROMPT=AI_PROMPT
+    .replace('{location}',formData?.location?.label)
+    .replace('{total days}',formData?.noOfDays)
+    .replace('{traveler}',formData?.traveler)
+    .replace('{budget}',formData?.budget)
+    .replace('{total days}',formData?.noOfDays)
+
+    console.log(FINAL_PROMPT);
+
+    const result = await chatSession.sendMessage(FINAL_PROMPT);
+
+    console.log(result?.response?.text());
   }
  
 
