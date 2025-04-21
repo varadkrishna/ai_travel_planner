@@ -5,16 +5,15 @@ import './index.css';
 import { createBrowserRouter, RouterProvider } from 'react-router-dom';
 import CreateTrip from './create-trip/CreateTrip';
 import { GoogleOAuthProvider } from '@react-oauth/google';
+import ViewTrip from './view-trip/[tripId]/index.jsx'; // Fixed path and name
 
 const router = createBrowserRouter([
+  { path: '/', element: <App /> },
+  { path: '/createtrip', element: <CreateTrip /> },
   {
-    path: '/',
-    element: <App />,
-  },
-  {
-    path: '/createtrip',
-    element: <CreateTrip />,
-  },
+    path: '/view-trip/:tripId', // Fixed spelling
+    element: <ViewTrip /> // Capitalized component name
+  }
 ]);
 
 ReactDOM.createRoot(document.getElementById('root')).render(

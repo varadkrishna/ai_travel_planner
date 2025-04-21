@@ -1,16 +1,12 @@
-import { useState } from 'react';
-import { Toaster } from 'sonner';  // ✅ Important: Import Toaster here
-
+import { Toaster } from 'sonner';
 import Header from './components/custom/Header';
 import CreateTrip from './create-trip/CreateTrip';
 import Hero from './components/custom/Hero';
 
 function App() {
-  const [count, setCount] = useState(0);
-
   return (
     <>
-      <Toaster richColors position="top-center" /> {/* ✅ Add Toaster here */}
+      <Toaster richColors position="top-center" />
       <Header />
       <Hero />
       <CreateTrip />
