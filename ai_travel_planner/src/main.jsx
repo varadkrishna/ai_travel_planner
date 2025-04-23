@@ -5,15 +5,12 @@ import './index.css';
 import { createBrowserRouter, RouterProvider } from 'react-router-dom';
 import CreateTrip from './create-trip/CreateTrip';
 import { GoogleOAuthProvider } from '@react-oauth/google';
-import ViewTrip from './view-trip/[tripId]/index.jsx'; // Fixed path and name
+import ViewTrip from './View-trip/ViewTrip.jsx'; // ✅ Correct casing
 
 const router = createBrowserRouter([
   { path: '/', element: <App /> },
   { path: '/createtrip', element: <CreateTrip /> },
-  {
-    path: '/view-trip/:tripId', // Fixed spelling
-    element: <ViewTrip /> // Capitalized component name
-  }
+  { path: '/view-trip/:tripId', element: <ViewTrip /> } // ✅ Routing stays the same
 ]);
 
 ReactDOM.createRoot(document.getElementById('root')).render(

@@ -1,13 +1,12 @@
+// src/firebaseConfig.jsx
 import { initializeApp } from "firebase/app";
 import { getFirestore } from "firebase/firestore";
 
-// ✅ Check if the env variable is properly loaded
+// ✅ Load environment variable
 const firebaseApiKey = import.meta.env.VITE_FIREBASE_API_KEY;
 
 if (!firebaseApiKey) {
   console.error("❌ Missing Firebase API Key in .env file!");
-} else {
-  console.log("✅ Firebase API Key loaded successfully.");
 }
 
 const firebaseConfig = {
@@ -20,11 +19,9 @@ const firebaseConfig = {
   measurementId: "G-N8XT8DXRJY",
 };
 
+// ✅ Initialize Firebase
 const app = initializeApp(firebaseConfig);
 const db = getFirestore(app);
 
-// ✅ Debug logs to make sure everything is loaded correctly
-console.log("✅ Firebase initialized");
-console.log("🔥 Firestore instance:", db);
-
+// ✅ Export for use in components
 export { app, db };

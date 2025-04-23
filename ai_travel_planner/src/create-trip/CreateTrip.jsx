@@ -8,8 +8,9 @@ import { FcGoogle } from "react-icons/fc";
 import { useGoogleLogin } from "@react-oauth/google";
 import axios from "axios";
 import { doc, setDoc } from "firebase/firestore";
-import { db } from "@/service/FirebaseConfig";
+import { db } from "../FirebaseConfig";
 import { AI_PROMPT, SelectBudgetOptions, SelectTravelesList } from "../constants/options";
+import { useNavigate } from "react-router-dom";
 
 function CreateTrip() {
   const [place, setPlace] = useState(null);
@@ -18,6 +19,7 @@ function CreateTrip() {
   const [selectedBudget, setSelectedBudget] = useState(null);
   const [selectedTraveler, setSelectedTraveler] = useState(null);
   const [loading, setLoading] = useState(false);
+  const navigate = useNavigate();
 
   const handleInputChange = (name, value) => {
     setFormData((prev) => ({
@@ -96,8 +98,9 @@ function CreateTrip() {
       const generatedTrip = await result?.response?.text();
       console.log(generatedTrip);
 
-      await SaveAiTrip(generatedTrip);
+      const docId = await SaveAiTrip(generatedTrip);
       toast.success("Trip generated successfully!");
+      navigate("/view-trip/" + docId);
     } catch (err) {
       console.error("Error generating trip:", err);
       toast.error("Failed to generate trip. Please try again.");
@@ -110,9 +113,8 @@ function CreateTrip() {
     try {
       setLoading(true);
       const user = JSON.parse(localStorage.getItem("user"));
-      const docId = Date.now().toString();  // Unique doc ID
+      const docId = Date.now().toString();
 
-      // Save the generated trip to Firestore
       await setDoc(doc(db, "AiTrips", docId), {
         userSelection: formData,
         tripData: TripData,
@@ -120,11 +122,12 @@ function CreateTrip() {
         id: docId,
       });
 
-      toast.success("Trip saved successfully!");
       console.log("🔥 Trip successfully saved to Firestore.");
+      return docId;
     } catch (err) {
       console.error("Error saving trip:", err);
       toast.error("Failed to save trip");
+      return null;
     } finally {
       setLoading(false);
     }
