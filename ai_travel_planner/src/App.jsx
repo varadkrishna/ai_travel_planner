@@ -3,6 +3,7 @@ import Header from './components/custom/Header';
 import CreateTrip from './create-trip/CreateTrip';
 import Hero from './components/custom/Hero';
 import ViewTrip from './View-trip/ViewTrip.jsx'; // ✅ Correct casing
+import InfoSection from './view-trip/components/InfoSection';
 
 function App() {
   return (
@@ -12,6 +13,7 @@ function App() {
       <Hero />
       <CreateTrip />
       <ViewTrip />
+      
     </>
   );
 }
