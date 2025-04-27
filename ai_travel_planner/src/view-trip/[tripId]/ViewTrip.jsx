@@ -2,8 +2,8 @@ import React, { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import { toast } from 'sonner';
 import { doc, getDoc } from 'firebase/firestore';
-import { db } from '../service/firebaseConfig'; // ✅ Adjusted relative path
-import InfoSection from './components/InfoSection';
+import { db } from '../../service/firebaseConfig.jsx'; // ✅ Adjusted relative path
+import InfoSection from '../components/InfoSection.jsx';
 
 function ViewTrip() {
   const { tripId } = useParams(); // Retrieve tripId from the URL

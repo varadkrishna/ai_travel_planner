@@ -5,7 +5,7 @@ import './index.css';
 import { createBrowserRouter, RouterProvider } from 'react-router-dom';
 import CreateTrip from './create-trip/CreateTrip';
 import { GoogleOAuthProvider } from '@react-oauth/google';
-import ViewTrip from './view-trip/ViewTrip.jsx'; // ✅ Correct casing
+import ViewTrip from './view-trip/[tripId]/ViewTrip.jsx'; // ✅ Correct casing
 
 const router = createBrowserRouter([
   { path: '/', element: <App /> },
