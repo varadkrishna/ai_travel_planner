@@ -2,7 +2,7 @@ import { Toaster } from 'sonner';
 import Header from './components/custom/Header';
 import CreateTrip from './create-trip/CreateTrip';
 import Hero from './components/custom/Hero';
-import ViewTrip from './View-trip/ViewTrip.jsx'; // ✅ Correct casing
+import ViewTrip from './view-trip/ViewTrip.jsx'; // ✅ Correct casing
 import InfoSection from './view-trip/components/InfoSection';
 
 function App() {
