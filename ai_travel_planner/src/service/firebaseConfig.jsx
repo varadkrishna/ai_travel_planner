@@ -10,7 +10,7 @@ const firebaseConfig = {
   storageBucket: "travello-76672.appspot.com", // <-- corrected here
   messagingSenderId: "1052289822749",
   appId: "1:1052289822749:web:06da006cf0614f8df216f4",
-  measurementId: "G-N8XT8DXRJY"
+  measurementId: "G-N8XT8DXRJY",
 };
 
 // Initialize Firebase

@@ -4,6 +4,8 @@ import { toast } from 'sonner';
 import { doc, getDoc } from 'firebase/firestore';
 import { db } from '../../service/firebaseConfig.jsx'; // ✅ Adjusted relative path
 import InfoSection from '../components/InfoSection.jsx';
+import { Plane } from 'lucide-react';
+import PlacesToVisit from '../components/PlacesToVisit.jsx';
 
 function ViewTrip() {
   const { tripId } = useParams(); // Retrieve tripId from the URL
@@ -48,12 +50,16 @@ function ViewTrip() {
       <InfoSection trip={trip} />
 
       {/* Recommended Hotels (if any) */}
+      <Hotels trip ={trip}/>
+
       {/* Placeholder for hotels and other recommendations */}
       
       {/* Daily Plan (if any) */}
+      <PlacesToVisit trip={trip} />
       {/* Placeholder for itinerary or other dynamic content */}
       
       {/* Footer (if any) */}
+      <Footer trip ={trip}/>
       {/* Placeholder for footer */}
     </div>
   );

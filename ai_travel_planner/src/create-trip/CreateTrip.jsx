@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import { toast } from "sonner";
 import GooglePlacesAutocomplete from "react-google-places-autocomplete";
 import { chatSession } from "@/service/AIMODAL";
@@ -96,7 +96,10 @@ function CreateTrip() {
         .replace("{budget}", formData?.budget);
 
       const result = await chatSession.sendMessage(FINAL_PROMPT);
-      const generatedTripText = result?.response?.text();
+
+      // ✨ Important: await the .text() method
+      const generatedTripText = await result?.response?.text();
+
       console.log("Generated Trip:", generatedTripText);
 
       const docId = Date.now().toString();
@@ -118,7 +121,7 @@ function CreateTrip() {
 
       await setDoc(doc(db, "AITrips", docId), {
         userSelection: formData,
-        tripData: JSON.parse(tripDataText),
+        tripData: tripDataText,
         userEmail: user?.email,
         id: docId,
         createdAt: new Date().toISOString(),
@@ -216,6 +219,7 @@ function CreateTrip() {
       <div>
         <button
           onClick={OnGenerateTrip}
+          disabled={loading}
           className="my-10 justify-center flex items-center gap-2 bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
         >
           {loading ? (
@@ -234,7 +238,9 @@ function CreateTrip() {
           <DialogHeader>
             <DialogDescription className="text-center">
               <img src="/logo.svg" alt="Logo" className="mx-auto mb-6 w-20 h-20" />
-              <h2 className="font-bold text-2xl text-gray-800">Welcome to Trip Planner 🚀</h2>
+              <h2 className="font-bold text-2xl text-gray-800">
+                Welcome to Trip Planner 🚀
+              </h2>
               <p className="text-gray-500 mt-2 mb-6">
                 Sign in with Google to continue planning your amazing trip!
               </p>
